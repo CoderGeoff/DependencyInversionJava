@@ -84,7 +84,7 @@ as before, there are no tests as yet.
 ## Task 3
 
 Your task is to write a test to prove that, given a player on the second square on the board (numbered 2), when they  move 1, they end up on square 3. 
-If you look in  siemens.plm.dependencyinversion.snakesandladdersdependencyinversion.tests.MoveTests.cpp, you'll find test case declaration that just needs filling in.
+If you look in `siemens.plm.dependencyinversion.snakesandladdersdependencyinversion.tests.MoveTests.java`, you'll find test case declaration that just needs filling in.
 
 ```
 public class MoveTests {
