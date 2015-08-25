@@ -7,9 +7,9 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class SnakesAndLadders implements ISnakesAndLadders {
-	private Board m_Board;
-	private int m_CurrentPlayerIndex;
-	private Player[] m_Players;
+	private Board board;
+	private int currentPlayerIndex;
+	private Player[] players;
 	private static Map<Integer, String> s_Numbers = new HashMap<Integer, String>();
 	private Scanner consoleReader = new Scanner(System.in);
 
@@ -23,21 +23,23 @@ public class SnakesAndLadders implements ISnakesAndLadders {
 	}
 
 	public SnakesAndLadders(List<String> players) {
-		m_Board = new Board(10);
-		m_CurrentPlayerIndex = 0;
-		m_Players = players.stream().map(name -> new Player(name)).collect(Collectors.toList())
+		board = new Board(10);
+		currentPlayerIndex = 0;
+		thisplayers = players.stream()
+				.map(name -> new Player(name))
+				.collect(Collectors.toList())
 				.toArray(new Player[] {});
 	}
 
 	public void play() {
 		System.out.println("Let's start");
 		while (takeNextTurn()) {
-			m_CurrentPlayerIndex = ++m_CurrentPlayerIndex % m_Players.length;
+			currentPlayerIndex = ++currentPlayerIndex % players.length;
 		}
 	}
 
 	private boolean takeNextTurn() {
-		Player player = m_Players[m_CurrentPlayerIndex];
+		Player player = players[currentPlayerIndex];
 		System.out.printf("Ok, %s to go next. Press any key to continue.\n", player.getName());
 		consoleReader.nextLine();
 
@@ -48,16 +50,16 @@ public class SnakesAndLadders implements ISnakesAndLadders {
 
 		// move the number of square shown on the die
 		int newPosition = player.getSquare() + thrown;
-		if (newPosition > m_Board.getLastSquare()) {
+		if (newPosition > board.getLastSquare()) {
 			// if we've overshot the last square, we have to go back
-			int numberOfSpacesToGoBack = m_Board.getLastSquare() - newPosition;
-			newPosition = m_Board.getLastSquare() - numberOfSpacesToGoBack;
+			int numberOfSpacesToGoBack = board.getLastSquare() - newPosition;
+			newPosition = board.getLastSquare() - numberOfSpacesToGoBack;
 			System.out.println("Bad luck - you overshot the end!");
 		}
 		System.out.printf("You're now on %d\n", newPosition);
 
 		// check to see if we're at the head of a snake
-		Integer tail = m_Board.tryGetSnakeTailWithHeadAt(newPosition);
+		Integer tail = board.tryGetSnakeTailWithHeadAt(newPosition);
 		if (tail != null) {
 			System.out.println("Oh no, you've landed on a snake. Down you go!");
 			newPosition = tail.intValue();
@@ -66,7 +68,7 @@ public class SnakesAndLadders implements ISnakesAndLadders {
 		player.setSquare(newPosition);
 
 		// see if the player has won
-		if (newPosition == m_Board.getLastSquare()) {
+		if (newPosition == board.getLastSquare()) {
 			System.out.println("You've won!");
 			return false;
 		}

@@ -3,13 +3,13 @@ package siemens.plm.dependencyinversion.snakesandladders;
 import java.util.Random;
 
 public class Die {
-	 private static Random s_Random = new Random();
+	 private static Random random = new Random();
 	 
 	 static { 
-		 s_Random.setSeed(System.currentTimeMillis());
+		 random.setSeed(System.currentTimeMillis());
 	 }
 	 
 	 public static int getThrow() {
-		 return s_Random.nextInt(6) + 1;
+		 return random.nextInt(6) + 1;
 	 }
 }

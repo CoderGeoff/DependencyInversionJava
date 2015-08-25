@@ -1,23 +1,23 @@
 package siemens.plm.dependencyinversion.snakesandladders;
 
 public class Player {
-	private String m_Name;
-	private int m_CurrentSquare;
+	private String name;
+	private int currentSquare;
 	
 	public Player(String name) {
-		m_Name = name;
-		m_CurrentSquare = 0;
+		this.name = name;
+		currentSquare = 0;
 	}
 	
 	public String getName() {
-	    return m_Name;
+	    return name;
 	}
 
 	public void setSquare(int newPosition) {
-	    m_CurrentSquare = newPosition;
+	    currentSquare = newPosition;
 	}
 
 	public int getSquare() {
-	    return m_CurrentSquare;
+	    return currentSquare;
 	}
 }

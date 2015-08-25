@@ -5,20 +5,20 @@ import java.util.Map;
 import java.util.Random;
 
 public class Board {
-	private int m_LastSquare;
-	private Map<Integer, Integer> m_Snakes;
+	private int lastSquare;
+	private Map<Integer, Integer> snakes;
 
 	public Board(int sizeOfOneSide) {
-		m_LastSquare = (sizeOfOneSide * sizeOfOneSide) - 1;
-		m_Snakes = makeSnakes(sizeOfOneSide);
+		lastSquare = (sizeOfOneSide * sizeOfOneSide) - 1;
+		snakes = makeSnakes(sizeOfOneSide);
 	}
 
 	public Integer tryGetSnakeTailWithHeadAt(int square) {
-	    return m_Snakes.get(square);
+	    return snakes.get(square);
 	}
 
 	public int getLastSquare() {
-		return m_LastSquare;
+		return lastSquare;
 	}
 
 	private Map<Integer, Integer> makeSnakes(int sizeOfOneSide) {
