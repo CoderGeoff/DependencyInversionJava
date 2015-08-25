@@ -7,22 +7,22 @@ public class Move {
 		this.board = board;
 	}
 	
-	MoveOutcome execute(int startSquare, int squaresToMove)
+	public MoveOutcome execute(int startSquare, int squaresToMove)
 	{
 	    // move the number of square shown on the die
 	    int newPosition = startSquare + squaresToMove;
-	    MoveOutcomeBuilder outcomeBuilder(newPosition);
+	    MoveOutcomeBuilder outcomeBuilder = new MoveOutcomeBuilder(newPosition);
 
-	    if (newPosition > m_Board->LastSquare())
+	    if (newPosition > board.getLastSquare())
 	    {
 	        // if we've overshot the last square, we have to go back
-	        int numberOfSpacesToGoBack = m_Board->LastSquare() - newPosition;
-	        newPosition = m_Board->LastSquare() - numberOfSpacesToGoBack;
+	        int numberOfSpacesToGoBack = board.getLastSquare() - newPosition;
+	        newPosition = board.getLastSquare() - numberOfSpacesToGoBack;
 	        outcomeBuilder.OvershotTo(newPosition);
 	    }
 
 	    // check to see if we're at the head of a snake
-	    int tail = board.tryGetSnakeTailWithHeadAt(newPosition);
+	    Integer tail = board.tryGetSnakeTailWithHeadAt(newPosition);
 	    if (tail != null)
 	    {
 	        outcomeBuilder.WentDownSnakeTo(tail.intValue());
