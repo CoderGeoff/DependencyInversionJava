@@ -10,22 +10,22 @@ public class SnakesAndLadders implements ISnakesAndLadders {
 	private Board board;
 	private int currentPlayerIndex;
 	private Player[] players;
-	private static Map<Integer, String> s_Numbers = new HashMap<Integer, String>();
+	private static Map<Integer, String> numbers = new HashMap<Integer, String>();
 	private Scanner consoleReader = new Scanner(System.in);
 
 	static {
-		s_Numbers.put(1, "one");
-		s_Numbers.put(2, "two");
-		s_Numbers.put(3, "three");
-		s_Numbers.put(4, "four");
-		s_Numbers.put(5, "five");
-		s_Numbers.put(6, "six");
+		numbers.put(1, "one");
+		numbers.put(2, "two");
+		numbers.put(3, "three");
+		numbers.put(4, "four");
+		numbers.put(5, "five");
+		numbers.put(6, "six");
 	}
 
 	public SnakesAndLadders(List<String> players) {
 		board = new Board(10);
 		currentPlayerIndex = 0;
-		thisplayers = players.stream()
+		this.players = players.stream()
 				.map(name -> new Player(name))
 				.collect(Collectors.toList())
 				.toArray(new Player[] {});
@@ -79,7 +79,7 @@ public class SnakesAndLadders implements ISnakesAndLadders {
 	private void printMoving(int count) {
 		System.out.print("Moving... ");
 		for (int i = 1; i <= count; ++i) {
-			System.out.printf("%s... ", s_Numbers.get(i));
+			System.out.printf("%s... ", numbers.get(i));
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
