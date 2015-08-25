@@ -1,9 +1,9 @@
 package siemens.plm.dependencyinversion.snakesladders;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class SnakesAndLadders implements ISnakesAndLadders {
@@ -11,6 +11,7 @@ public class SnakesAndLadders implements ISnakesAndLadders {
 	private int m_CurrentPlayerIndex;
 	private Player[] m_Players;
 	private static Map<Integer, String> s_Numbers = new HashMap<Integer, String>();
+	private Scanner consoleReader = new Scanner(System.in);
 
 	static {
 		s_Numbers.put(1, "one");
@@ -24,9 +25,7 @@ public class SnakesAndLadders implements ISnakesAndLadders {
 	public SnakesAndLadders(List<String> players) {
 		m_Board = new Board(10);
 		m_CurrentPlayerIndex = 0;
-		m_Players = players.stream()
-				.map(name -> new Player(name))
-				.collect(Collectors.toList())
+		m_Players = players.stream().map(name -> new Player(name)).collect(Collectors.toList())
 				.toArray(new Player[] {});
 	}
 
@@ -40,10 +39,7 @@ public class SnakesAndLadders implements ISnakesAndLadders {
 	private boolean takeNextTurn() {
 		Player player = m_Players[m_CurrentPlayerIndex];
 		System.out.printf("Ok, %s to go next. Press any key to continue.\n", player.getName());
-		try {
-			System.in.read();
-		} catch (IOException e) {
-		}
+		consoleReader.nextLine();
 
 		// throw the die
 		int thrown = Die.getThrow();
@@ -81,7 +77,7 @@ public class SnakesAndLadders implements ISnakesAndLadders {
 	private void printMoving(int count) {
 		System.out.print("Moving... ");
 		for (int i = 1; i <= count; ++i) {
-			System.out.printf("%d... ", s_Numbers.get(i));
+			System.out.printf("%s... ", s_Numbers.get(i));
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
