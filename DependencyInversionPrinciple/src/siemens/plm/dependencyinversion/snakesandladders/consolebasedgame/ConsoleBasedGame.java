@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import siemens.plm.dependencyinversion.snakesladders.ISnakesAndLadders;
-import siemens.plm.dependencyinversion.snakesladders.SnakesAndLaddersFactory;
+import siemens.plm.dependencyinversion.snakesandladders.ISnakesAndLadders;
+import siemens.plm.dependencyinversion.snakesandladders.SnakesAndLaddersFactory;
 
 public class ConsoleBasedGame {
 	

@@ -1,4 +1,4 @@
-package siemens.plm.dependencyinversion.snakesladders;
+package siemens.plm.dependencyinversion.snakesandladders;
 
 public class Player {
 	private String m_Name;

@@ -1,4 +1,4 @@
-package siemens.plm.dependencyinversion.snakesladders;
+package siemens.plm.dependencyinversion.snakesandladders;
 
 import java.util.HashMap;
 import java.util.List;
