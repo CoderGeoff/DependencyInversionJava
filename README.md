@@ -1,10 +1,21 @@
 # DependencyInversionPrincipleJava
 An exercise on the dependency inversion principle, for a Java / Eclipse environment.
+Based on Java 1.8, JUnit 4 and Eclipse 4.5.0.
 
 This exercise is based on the popular board game of snakes and ladders, which you can read up about here <https://en.wikipedia.org/wiki/Snakes_and_Ladders>, although, to keep things more simple, this version has only 
 snakes and no ladders. You should make sure you're familiar with the rules. Here's a clear, succinct version: <http://www.ehow.com/facts_5163203_snakes-amp-ladders-rules.html>.
 
+## Getting started
+
+1. Clone the repository 
+2. Open Eclipse
+3. Set the Eclipse workspace at the root directory of the repository
+4. Run the JUnit tests in `siemens.plm.dependencyinversion.snakesandladders.tests` and `siemens.plm.dependencyinversion.snakesandladdersdependencyinversion.tests` 
+5. Have a look at the code in `siemens.plm.dependencyinversion.snakesandladders` and `siemens.plm.dependencyinversion.snakesandladders.tests`, as indicated below:
+
 # Code that doesn't adhere to the Dependency Inversion Principle
+
+In `siemens.plm.dependencyinversion.snakesandladders.consolebasedgame`, there's an version of the game you and run on a console and play. It has a simple implementation of `main()` in `ConsoleBasedGame.java`.
 
 In `siemens.plm.dependencyinversion.snakesandladders`, there's an implementation of the game that doesn't adhere to the Dependency Inversion Principle. It has the following classes:
 
