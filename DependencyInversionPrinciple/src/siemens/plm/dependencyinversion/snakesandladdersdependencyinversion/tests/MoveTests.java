@@ -11,7 +11,8 @@ import siemens.plm.dependencyinversion.snakesandladdersdependencyinversion.MoveO
 public class MoveTests {
 
 	@Test
-	public void givenIAmOnSquare2_WhenIMove1Square_IShouldBeOnSquare3() {
+	public void givenAPlayerOnSquare97_WhenTheyMove3_TheyShouldEndUpOnSquare98() {
 
+		
 	}
 }
