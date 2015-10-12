@@ -12,6 +12,7 @@ public class SnakesAndLadders implements ISnakesAndLadders {
 	private Player[] players;
 	private int currentPlayerIndex;
 	private static Map<Integer, String> numbers = new HashMap<Integer, String>();
+	private Move move;
 	private Scanner consoleReader = new Scanner(System.in);
 	
     private static final int NotStarted = -1;
@@ -27,6 +28,7 @@ public class SnakesAndLadders implements ISnakesAndLadders {
 
 	public SnakesAndLadders(List<String> players) {
 		board = new Board(10);
+		move = new Move(board);
 		this.players = players.stream()
 				.map(name -> new Player(name))
 				.collect(Collectors.toList())
@@ -44,29 +46,13 @@ public class SnakesAndLadders implements ISnakesAndLadders {
 		System.out.printf("Ok, %s to go next. Press any key to continue.\n", player.getName());
 		consoleReader.nextLine();
 
-		// throw the die
-		int thrown = Die.getThrow();
+	    int thrown = Die.getThrow();
 		System.out.printf("%s has thrown a %d\n", player.getName(), thrown);
-		printMoving(thrown);
+	    printMoving(thrown);
 
-		// move the number of square shown on the die
-		int newPosition = player.getSquare() + thrown;
-		if (newPosition > board.getLastSquare()) {
-			// if we've overshot the last square, we have to go back
-			int numberOfSpacesToGoBack = board.getLastSquare() - newPosition;
-			newPosition = board.getLastSquare() - numberOfSpacesToGoBack;
-			System.out.println("Bad luck - you overshot the end!");
-		}
-		System.out.printf("You're now on %d\n", newPosition);
-
-		// check to see if we're at the head of a snake
-		Integer tail = board.tryGetSnakeTailWithHeadAt(newPosition);
-		if (tail != null) {
-			System.out.println("Oh no, you've landed on a snake. Down you go!");
-			newPosition = tail.intValue();
-			System.out.printf("You're now on %d\n", newPosition);
-		}
-		player.setSquare(newPosition);
+	    MoveOutcome outcome = move.execute(player.getSquare(), thrown);
+	    printMove(outcome);
+	    player.setSquare(outcome.getSquareAtEndOfMove());
 		
 	    currentPlayerIndex = ++currentPlayerIndex % players.length;
 	}
@@ -90,5 +76,20 @@ public class SnakesAndLadders implements ISnakesAndLadders {
 			}
 		}
 		System.out.println("");
+	}
+	
+	void printMove(MoveOutcome outcome)
+	{
+	    if (outcome.isOvershot())
+	    {
+			System.out.println("Bad luck - you overshot the end!");
+	    }
+		System.out.printf("You're now on %d\n", outcome.getSquareAtEndOfDiceCount());
+
+	    if (outcome.didHitSnake())
+	    {
+			System.out.println("Oh no, you've landed on a snake. Down you go!");
+			System.out.printf("You're now on %d\n", outcome.getSquareAtEndOfMove());
+	    }
 	}
 }
