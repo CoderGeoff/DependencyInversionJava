@@ -91,12 +91,12 @@ public class SnakesAndLadders implements ISnakesAndLadders {
 	    {
 			System.out.println("Bad luck - you overshot the end!");
 	    }
-		System.out.printf("You're now on %d\n", outcome.getSquareAtEndOfDiceCount());
+		System.out.printf("You're now on %d\n", outcome.getSquareAtEndOfDiceCount() + 1);
 
 	    if (outcome.didHitSnake())
 	    {
 			System.out.println("Oh no, you've landed on a snake. Down you go!");
-			System.out.printf("You're now on %d\n", outcome.getSquareAtEndOfMove());
+			System.out.printf("You're now on %d\n", outcome.getSquareAtEndOfMove() + 1);
 	    }
 	}
 }
