@@ -16,7 +16,7 @@ public class Move {
 	    if (newPosition > board.getLastSquare())
 	    {
 	        // if we've overshot the last square, we have to go back
-	        int numberOfSpacesToGoBack = board.getLastSquare() - newPosition;
+	        int numberOfSpacesToGoBack = newPosition - board.getLastSquare();
 	        newPosition = board.getLastSquare() - numberOfSpacesToGoBack;
 	        outcomeBuilder.OvershotTo(newPosition);
 	    }
