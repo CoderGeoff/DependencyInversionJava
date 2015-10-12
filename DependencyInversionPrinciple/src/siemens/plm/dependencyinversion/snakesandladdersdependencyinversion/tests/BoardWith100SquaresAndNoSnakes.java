@@ -2,7 +2,7 @@ package siemens.plm.dependencyinversion.snakesandladdersdependencyinversion.test
 
 import siemens.plm.dependencyinversion.snakesandladdersdependencyinversion.IBoard;
 
-public class BoardWith10SquaresAndNoSnakes implements IBoard {
+public class BoardWith100SquaresAndNoSnakes implements IBoard {
 
 	@Override
 	public Integer tryGetSnakeTailWithHeadAt(int square) {
@@ -11,7 +11,7 @@ public class BoardWith10SquaresAndNoSnakes implements IBoard {
 
 	@Override
 	public int getLastSquare() {
-		return 10;
+		return 99;
 	}
 
 }
