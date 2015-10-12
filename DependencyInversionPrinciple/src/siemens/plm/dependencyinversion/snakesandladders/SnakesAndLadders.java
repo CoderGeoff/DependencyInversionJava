@@ -1,5 +1,6 @@
 package siemens.plm.dependencyinversion.snakesandladders;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,10 +9,12 @@ import java.util.stream.Collectors;
 
 public class SnakesAndLadders implements ISnakesAndLadders {
 	private Board board;
-	private int currentPlayerIndex;
 	private Player[] players;
+	private int currentPlayerIndex;
 	private static Map<Integer, String> numbers = new HashMap<Integer, String>();
 	private Scanner consoleReader = new Scanner(System.in);
+	
+    private static final int NotStarted = -1;
 
 	static {
 		numbers.put(1, "one");
@@ -24,22 +27,20 @@ public class SnakesAndLadders implements ISnakesAndLadders {
 
 	public SnakesAndLadders(List<String> players) {
 		board = new Board(10);
-		currentPlayerIndex = 0;
 		this.players = players.stream()
 				.map(name -> new Player(name))
 				.collect(Collectors.toList())
 				.toArray(new Player[] {});
+		this.currentPlayerIndex = NotStarted;
 	}
 
 	public void play() {
-		System.out.println("Let's start");
-		while (takeNextTurn()) {
-			currentPlayerIndex = ++currentPlayerIndex % players.length;
+		if (isFirstMove()) {
+			System.out.println("Let's start");
+			currentPlayerIndex = 0;
 		}
-	}
-
-	private boolean takeNextTurn() {
-		Player player = players[currentPlayerIndex];
+		
+	    Player player = players[currentPlayerIndex];
 		System.out.printf("Ok, %s to go next. Press any key to continue.\n", player.getName());
 		consoleReader.nextLine();
 
@@ -66,16 +67,19 @@ public class SnakesAndLadders implements ISnakesAndLadders {
 			System.out.printf("You're now on %d\n", newPosition);
 		}
 		player.setSquare(newPosition);
-
-		// see if the player has won
-		if (newPosition == board.getLastSquare()) {
-			System.out.println("You've won!");
-			return false;
-		}
-
-		return true;
+		
+	    currentPlayerIndex = ++currentPlayerIndex % players.length;
 	}
 
+	@Override
+	public boolean isFinished() {
+		return Arrays.stream(players).anyMatch(player -> player.getSquare() == board.getLastSquare());
+	}
+	
+	private boolean isFirstMove() {
+		return currentPlayerIndex == NotStarted;
+	}
+	
 	private void printMoving(int count) {
 		System.out.print("Moving... ");
 		for (int i = 1; i <= count; ++i) {

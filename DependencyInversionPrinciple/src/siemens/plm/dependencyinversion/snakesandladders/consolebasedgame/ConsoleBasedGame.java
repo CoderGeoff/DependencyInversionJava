@@ -14,7 +14,9 @@ public class ConsoleBasedGame {
 
 		List<String> players = readPlayersFromConsole();
 		ISnakesAndLadders game = new SnakesAndLaddersFactory().create(players);
-	    game.play();
+		while (!game.isFinished()) {
+			game.play();
+		}
 	}
 	
 	private static List<String> readPlayersFromConsole(){

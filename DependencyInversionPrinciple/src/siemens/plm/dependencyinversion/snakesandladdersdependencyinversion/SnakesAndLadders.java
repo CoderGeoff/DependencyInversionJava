@@ -1,5 +1,6 @@
 package siemens.plm.dependencyinversion.snakesandladdersdependencyinversion;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,9 +14,12 @@ public class SnakesAndLadders implements ISnakesAndLadders {
 	private IBoard board;
 	private IDie die;
 	private Player[] players;
+	private int currentPlayerIndex;
 	private Move move;
     private Scanner consoleReader = new Scanner(System.in);
 
+    private static final int NotStarted = -1;
+    
 	private static Map<Integer, String> numbers = new HashMap<Integer, String>();
 	static {
 		numbers.put(1, "one");
@@ -35,29 +39,38 @@ public class SnakesAndLadders implements ISnakesAndLadders {
 				.map(name -> new Player(name))
 				.collect(Collectors.toList())
 				.toArray(new Player[] {});
+		this.currentPlayerIndex = NotStarted;
 	}
 	
 	@Override
 	public void play() {
-		System.out.println("Let's start");
-	    for (int playerIndex = 0;
-	        players[playerIndex].getSquare() != board.getLastSquare();
-	        playerIndex = ++playerIndex % players.length) {
-	    	
-	        Player player = players[playerIndex];
-			System.out.printf("Ok, %s to go next. Press any key to continue.\n", player.getName());
-			consoleReader.nextLine();
+		if (isFirstMove()) {
+			System.out.println("Let's start");
+			currentPlayerIndex = 0;
+		}
+		
+	    Player player = players[currentPlayerIndex];
+		System.out.printf("Ok, %s to go next. Press any key to continue.\n", player.getName());
+		consoleReader.nextLine();
 
-	        int thrown = die.getThrow();
-			System.out.printf("%s has thrown a %d\n", player.getName(), thrown);
-	        printMoving(thrown);
+	    int thrown = die.getThrow();
+		System.out.printf("%s has thrown a %d\n", player.getName(), thrown);
+	    printMoving(thrown);
 
-	        MoveOutcome outcome= move.execute(player.getSquare(), thrown);
-	        printMove(outcome);
-	        player.setSquare(outcome.getSquareAtEndOfMove());
-	    } 
-
-		System.out.println("You've won!");
+	    MoveOutcome outcome = move.execute(player.getSquare(), thrown);
+	    printMove(outcome);
+	    player.setSquare(outcome.getSquareAtEndOfMove());
+	        
+	    currentPlayerIndex = ++currentPlayerIndex % players.length;
+	}
+		
+	@Override
+	public boolean isFinished() {
+		return Arrays.stream(players).anyMatch(player -> player.getSquare() == board.getLastSquare());
+	}
+	
+	private boolean isFirstMove() {
+		return currentPlayerIndex == NotStarted;
 	}
 	
 	private void printMoving(int count) {
