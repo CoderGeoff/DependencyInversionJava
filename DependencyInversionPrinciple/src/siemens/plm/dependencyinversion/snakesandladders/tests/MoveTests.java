@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import siemens.plm.dependencyinversion.snakesandladdersdependencyinversion.*;
+import siemens.plm.dependencyinversion.snakesandladders.*;
 
 public class MoveTests {
 
