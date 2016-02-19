@@ -7,8 +7,6 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import siemens.plm.dependencyinversion.snakesandladders.Player;
-
 public class SnakesAndLadders implements ISnakesAndLadders {
 
 	private IBoard board;
