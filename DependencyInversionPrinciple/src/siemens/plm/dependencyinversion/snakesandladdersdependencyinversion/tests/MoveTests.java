@@ -18,9 +18,6 @@ public class MoveTests {
 		Move move = new Move(board);
 		
 		// When
-		MoveOutcome outcome = move.execute(97,  3);
-		
-		// Then
-		assertEquals(98, outcome.getSquareAtEndOfMove());
+		// TODO implement the test
 	}
 }
