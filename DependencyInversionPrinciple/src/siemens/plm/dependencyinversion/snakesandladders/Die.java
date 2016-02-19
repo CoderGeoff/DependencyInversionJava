@@ -2,14 +2,17 @@ package siemens.plm.dependencyinversion.snakesandladders;
 
 import java.util.Random;
 
-public class Die {
-	 private static Random random = new Random();
+public class Die implements IDie {
+
+	private static Random random = new Random();
 	 
-	 static { 
+    public Die() {
 		 random.setSeed(System.currentTimeMillis());
-	 }
-	 
-	 public static int getThrow() {
-		 return random.nextInt(6) + 1;
-	 }
+	}
+
+    @Override
+	public int getThrow() {
+	    return random.nextInt(6) + 1;
+	}
+
 }

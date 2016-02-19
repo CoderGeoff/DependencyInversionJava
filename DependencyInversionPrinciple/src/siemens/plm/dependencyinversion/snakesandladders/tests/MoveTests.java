@@ -4,17 +4,20 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import siemens.plm.dependencyinversion.snakesandladdersdependencyinversion.*;
+import siemens.plm.dependencyinversion.snakesandladders.IBoard;
+import siemens.plm.dependencyinversion.snakesandladders.Move;
+import siemens.plm.dependencyinversion.snakesandladders.MoveOutcome;
 
 public class MoveTests {
 
 	@Test
 	public void givenAPlayerOnSquare97_WhenTheyMove3_TheyShouldEndUpOnSquare98() {
+
 		// Given
-		Board board = new Board(10);
+		BoardWith100SquaresAndNoSnakes board = new BoardWith100SquaresAndNoSnakes();
 		Move move = new Move(board);
 		
-		// TODO complete test
+		// When
+		// TODO implement the test
 	}
-
 }

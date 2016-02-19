@@ -4,6 +4,9 @@ import java.util.List;
 
 public class SnakesAndLaddersFactory {
 	public ISnakesAndLadders create(List<String> players) {
-		return new SnakesAndLadders(players);
+		IBoard board = new Board(10);
+		IDie die = new Die();
+		return new SnakesAndLadders(board, die, players);
 	}
 }
+

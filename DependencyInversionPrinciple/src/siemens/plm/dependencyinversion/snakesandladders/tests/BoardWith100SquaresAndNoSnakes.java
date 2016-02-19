@@ -1,6 +1,6 @@
-package siemens.plm.dependencyinversion.snakesandladdersdependencyinversion.tests;
+package siemens.plm.dependencyinversion.snakesandladders.tests;
 
-import siemens.plm.dependencyinversion.snakesandladdersdependencyinversion.IBoard;
+import siemens.plm.dependencyinversion.snakesandladders.IBoard;
 
 public class BoardWith100SquaresAndNoSnakes implements IBoard {
 

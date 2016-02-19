@@ -1,9 +1,9 @@
 package siemens.plm.dependencyinversion.snakesandladders;
 
 public class Move {
-	private Board board;
+	private IBoard board;
 
-	public Move(Board board) {
+	public Move(IBoard board) {
 		this.board = board;
 	}
 	

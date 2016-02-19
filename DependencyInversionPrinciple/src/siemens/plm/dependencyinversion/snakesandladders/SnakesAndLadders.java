@@ -8,15 +8,17 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class SnakesAndLadders implements ISnakesAndLadders {
-	private Board board;
+
+	private IBoard board;
+	private IDie die;
 	private Player[] players;
 	private int currentPlayerIndex;
-	private static Map<Integer, String> numbers = new HashMap<Integer, String>();
 	private Move move;
-	private Scanner consoleReader = new Scanner(System.in);
-	
-    private static final int NotStarted = -1;
+    private Scanner consoleReader = new Scanner(System.in);
 
+    private static final int NotStarted = -1;
+    
+	private static Map<Integer, String> numbers = new HashMap<Integer, String>();
 	static {
 		numbers.put(1, "one");
 		numbers.put(2, "two");
@@ -26,16 +28,19 @@ public class SnakesAndLadders implements ISnakesAndLadders {
 		numbers.put(6, "six");
 	}
 
-	public SnakesAndLadders(List<String> players) {
-		board = new Board(10);
-		move = new Move(board);
+	public SnakesAndLadders(IBoard board, IDie die, List<String> players)
+	{
+		this.board = board;
+		this.die = die;
+		this.move = new Move(board);
 		this.players = players.stream()
 				.map(name -> new Player(name))
 				.collect(Collectors.toList())
 				.toArray(new Player[] {});
 		this.currentPlayerIndex = NotStarted;
 	}
-
+	
+	@Override
 	public void play() {
 		if (isFirstMove()) {
 			System.out.println("Let's start");
@@ -46,17 +51,17 @@ public class SnakesAndLadders implements ISnakesAndLadders {
 		System.out.printf("Ok, %s to go next. Press any key to continue.\n", player.getName());
 		consoleReader.nextLine();
 
-	    int thrown = Die.getThrow();
+	    int thrown = die.getThrow();
 		System.out.printf("%s has thrown a %d\n", player.getName(), thrown);
 	    printMoving(thrown);
 
 	    MoveOutcome outcome = move.execute(player.getSquare(), thrown);
 	    printMove(outcome);
 	    player.setSquare(outcome.getSquareAtEndOfMove());
-		
+	        
 	    currentPlayerIndex = ++currentPlayerIndex % players.length;
 	}
-
+		
 	@Override
 	public boolean isFinished() {
 		return Arrays.stream(players).anyMatch(player -> player.getSquare() == board.getLastSquare());

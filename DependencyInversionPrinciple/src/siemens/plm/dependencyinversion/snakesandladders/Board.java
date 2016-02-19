@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class Board {
+public class Board implements IBoard {
 	private int lastSquare;
 	private Map<Integer, Integer> snakes;
 
@@ -13,10 +13,12 @@ public class Board {
 		snakes = makeSnakes(sizeOfOneSide);
 	}
 
+	@Override
 	public Integer tryGetSnakeTailWithHeadAt(int square) {
 	    return snakes.get(square);
 	}
 
+	@Override
 	public int getLastSquare() {
 		return lastSquare;
 	}

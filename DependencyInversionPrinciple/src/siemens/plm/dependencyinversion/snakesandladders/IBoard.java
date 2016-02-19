@@ -1,4 +1,4 @@
-package siemens.plm.dependencyinversion.snakesandladdersdependencyinversion;
+package siemens.plm.dependencyinversion.snakesandladders;
 
 public interface IBoard {
 	public Integer tryGetSnakeTailWithHeadAt(int square);
