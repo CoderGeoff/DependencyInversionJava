@@ -7,11 +7,11 @@ snakes and no ladders. You should make sure you're familiar with the rules. Here
 
 ## Getting started
 
-1. Clone the repository 
+1. Clone the repository, checking out the master branch (this is the default) 
 2. Open Eclipse
 3. Set the Eclipse workspace at the root directory of the repository
-4. Run the JUnit tests in `siemens.plm.dependencyinversion.snakesandladders.tests` and `siemens.plm.dependencyinversion.snakesandladdersdependencyinversion.tests` 
-5. Have a look at the code in `siemens.plm.dependencyinversion.snakesandladders` and `siemens.plm.dependencyinversion.snakesandladders.tests`, as indicated below:
+4. Run the JUnit tests in `siemens.plm.dependencyinversion.snakesandladders.tests`  
+5. Have a look at the code in `siemens.plm.dependencyinversion.snakesandladders` as indicated below:
 
 # Code that doesn't adhere to the Dependency Inversion Principle
 
@@ -77,9 +77,9 @@ You test could be something like this.
 
 # Code that adheres rather more to the Dependency Inversion Principle
 
-Now look in 
+Now chck out the branch, DependencyInversion
 
-In `siemens.plm.dependencyinversion.snakesandladdersdependencyinversion`:
+In `siemens.plm.dependencyinversion.snakesandladders`:
 
 | Class | Description |
 |-------|-------------|
@@ -94,4 +94,4 @@ In `siemens.plm.dependencyinversion.snakesandladdersdependencyinversion`:
 | `MoveOutcomeBuilder` | A utility class used during to player's move to build MoveOutcome objects |
 | `SnakesAndLadders` | The game itself. It has one method, play, that interacts with the console as you play the game |
 
-Compare your code as it stands after Task 4 with the code here.
+Now repeat tasks 1-4, this writing the test tests, but starting with the code that adheres more to the dependency inversion  principle.
